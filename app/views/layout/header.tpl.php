@@ -10,11 +10,11 @@
     
 <header>
 
-<?php d(get_defined_vars()); 
-      d($_SESSION);?>
+<?php /*d(get_defined_vars()); 
+      d($_SESSION);*/?>
 
 
-Coucou header
+<h1>Gestion des voitures</h1>
 
 
 </header>

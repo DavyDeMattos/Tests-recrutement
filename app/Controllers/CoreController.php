@@ -28,7 +28,7 @@ abstract class CoreController {
         // On appele la méthode checkAuthorization qui vérifie que l'utilisateur courant possède bien les roles autorisés
         $this->checkAuthorization($roles);
 
-                                }
+    }
 
 }
 

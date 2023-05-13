@@ -36,6 +36,16 @@ $router->map(
     'main-home'
 );
 
+$router->map(
+    'GET',
+    '/car/list',
+    [
+        'method' => 'listAction',
+        'controller' => 'CarController'
+    ],
+    'car-list'
+);
+
 
 /* -------------
 --- DISPATCH ---

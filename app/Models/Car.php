@@ -24,7 +24,7 @@ class Car extends CoreModel
      */
     private $registration;
     /**
-     * @var int
+     * @var string
      */
     private $fuel;
     /**
@@ -32,11 +32,11 @@ class Car extends CoreModel
      */
     private $price;
     /**
-     * @var int
+     * @var string
      */
     private $kind;
     /**
-     * @var int
+     * @var string
      */
     private $reserved;
 
@@ -146,7 +146,7 @@ class Car extends CoreModel
         // TODO vérifier fonction
         // Récupération de l'objet PDO représentant la connexion à la DB
         $pdo = Database::getPDO();
-// (:brand, :model, :registration, :fuel, :price, :kind, :reserved)
+        // (:brand, :model, :registration, :fuel, :price, :kind, :reserved)
         // Ecriture de la requête UPDATE
         // ! Fonction SQL à modifier
         $sql = "
@@ -291,7 +291,7 @@ class Car extends CoreModel
     /**
      * Get the value of fuel
      *
-     * @return  int
+     * @return  string
      */ 
     public function getFuel()
     {
@@ -301,11 +301,11 @@ class Car extends CoreModel
     /**
      * Set the value of fuel
      *
-     * @param  int  $fuel
+     * @param  string  $fuel
      *
      * @return  self
      */ 
-    public function setFuel(int $fuel)
+    public function setFuel(string $fuel)
     {
         $this->fuel = $fuel;
 
@@ -339,7 +339,7 @@ class Car extends CoreModel
     /**
      * Get the value of kind
      *
-     * @return  int
+     * @return  string
      */ 
     public function getKind()
     {
@@ -349,11 +349,11 @@ class Car extends CoreModel
     /**
      * Set the value of kind
      *
-     * @param  int  $kind
+     * @param  string  $kind
      *
      * @return  self
      */ 
-    public function setKind(int $kind)
+    public function setKind(string $kind)
     {
         $this->kind = $kind;
 
@@ -363,7 +363,7 @@ class Car extends CoreModel
     /**
      * Get the value of reserved
      *
-     * @return  int
+     * @return  string
      */ 
     public function getReserved()
     {
@@ -373,11 +373,11 @@ class Car extends CoreModel
     /**
      * Set the value of reserved
      *
-     * @param  int  $reserved
+     * @param  string  $reserved
      *
      * @return  self
      */ 
-    public function setReserved(int $reserved)
+    public function setReserved(string $reserved)
     {
         $this->reserved = $reserved;
 

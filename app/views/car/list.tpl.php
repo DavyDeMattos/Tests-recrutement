@@ -1,30 +1,30 @@
-<?php use App\Utils\Database; ?>
-
 <table class="table container">
     <!-- <caption>Liste des voitures rentrées</caption> -->
     <thead>
         <tr>
             <th scope="col">Voiture</th>
-            <th scope="col">marque</th>
-            <th scope="col">modèle</th>
-            <th scope="col">plaque immatriculation</th>
-            <th scope="col">carburant</th>
-            <th scope="col">prix</th>
-            <th scope="col">type de vente</th>
-            <th scope="col">réservé ?</th>
+            <th scope="col">Marque</th>
+            <th scope="col">Modèle</th>
+            <th scope="col">Plaque immatriculation</th>
+            <th scope="col">Carburant</th>
+            <th scope="col">Prix</th>
+            <th scope="col">Type de vente</th>
+            <th scope="col">Réservé ?</th>
         </tr>
     </thead>
     <tbody class="table-group-divider">
     <?php foreach ($carList as $currentCar) : ?>
         <tr>
-            <th scope="row">1</th>
-            <td>Toyota</td>
-            <td>Prius</td>
-            <td>E6Z RJ45</td>
-            <td>Gazol</td>
-            <td>15 560 €</td>
-            <td>Occasion</td>
-            <td>Oui</td>
+            <th scope="row"><?= $currentCar->getId(); ?></th>
+            <td><?= $currentCar->getBrand(); ?></td>
+            <td><?= $currentCar->getModel(); ?></td>
+            <td><?= $currentCar->getRegistration(); ?></td>
+            <td><?= $currentCar->getFuel(); ?></td>
+            <td><?= $currentCar->getPrice(); ?> €</td>
+            <td><?= $currentCar->getKind(); ?></td>
+            <td><?= $currentCar->getReserved(); ?></td>
+            <td><input class="btn btn-primary" type="button" value="Edit"></td>
+            <td><input class="btn btn-danger" type="submit" value="Delete"></td>
         </tr>
     <?php endforeach; ?>
     </tbody>

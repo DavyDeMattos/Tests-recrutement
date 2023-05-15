@@ -31,7 +31,7 @@ class CarController extends CoreController
     }
 
     /**
-     * Méthode appelée par le formulaire de création d'une catégorie
+     * Méthode appelée par le formulaire d'ajout d'une voiture
      */
     public function createAction()
     {
@@ -41,21 +41,21 @@ class CarController extends CoreController
         // On récupère les infos de notre formulaire à l'aide de filter_input. Cette fonction permet d'aller vérifier qu'une entrée de $_POST existe et nous renvoyer son contenu. Si l'entrée n'existe pas, elle renvoie null. L'avantage c'est que $firstname sera toujours existante
         $brand = filter_input(INPUT_POST, 'brand');
         $model = filter_input(INPUT_POST, 'model');
-        $registration = filter_input(INPUT_POST, 'registration');
+        // strtoupper = put letter to uppercase
+        $registration = strtoupper(filter_input(INPUT_POST, 'registration'));
         $fuel = filter_input(INPUT_POST, 'fuel');
-        // floatval string to float
+        // floatval = string to float
         $price = floatval(filter_input(INPUT_POST, 'price'));
         $kind = filter_input(INPUT_POST, 'kind');
         $reserved = filter_input(INPUT_POST, 'reserved');
 
-        dump($price);
-        // Comme on utilise l'approche Active Record, on doit créer une catégorie vide et la remplir avec les infos provenant du formulaire.
+        // Comme on utilise l'approche Active Record, on doit créer une voiture vide et la remplir avec les infos provenant du formulaire.
 
         $newCar = new Car();
         
         // On utilise les données provenant du formulaire pour remplir la voiture
         $newCar->setBrand($brand);
-        $newCar->setBrand($model);
+        $newCar->setModel($model);
         $newCar->setRegistration($registration);
         $newCar->setFuel($fuel);
         $newCar->setPrice($price);
@@ -65,8 +65,8 @@ class CarController extends CoreController
         // Maintenant que la voiture est remplie avec les bonnes infos, on sauvegarde celle-ci dans la BDD en utilisant la méthode save() qui s'occupe de vérifier si la voiture existe et la créer avec insert()
         $newCar->save();
 
-        // Une fois la voiture insérée en BDD, on redirige vers la page liste des étudiants
-        //$this->redirect('car-list');
+        // Une fois la voiture insérée en BDD, on redirige vers la page liste des voitures
+        $this->redirect('car-list');
 
     }
 
@@ -117,7 +117,7 @@ class CarController extends CoreController
         
         // On modifie la voiture à éditer
         $carToEdit->setBrand($brand);
-        $carToEdit->setBrand($model);
+        $carToEdit->setModel($model);
         $carToEdit->setRegistration($registration);
         $carToEdit->setFuel($fuel);
         $carToEdit->setPrice($price);

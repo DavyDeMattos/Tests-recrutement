@@ -13,21 +13,21 @@ class CarController extends CoreController
      */
     public function listAction()
     {
-      // On veut récupérer la liste de toutes les voitures
-      // On demande donc à notre model car d'utiliser la méthode findAll
+        // On veut récupérer la liste de toutes les voitures
+        // On demande donc à notre model car d'utiliser la méthode findAll
 
-      // La méthode findAll est maintenant une méthode statique, elle n'a pas besoin qu'on instancie la classe pour l'utiliser.
-      // Pour utiliser une  méthode  statique, on utilise le nom de la classe suivi du nom de la méthode, séparés par "::" (opérateur de résolution de portée)
-      $carList = Car::findAll();
-      dump($carList);
+        // La méthode findAll est maintenant une méthode statique, elle n'a pas besoin qu'on instancie la classe pour l'utiliser.
+        // Pour utiliser une  méthode  statique, on utilise le nom de la classe suivi du nom de la méthode, séparés par "::" (opérateur de résolution de portée)
+        $carList = Car::findAll();
+        //dump($carList);
 
 
-      // On appelle la méthode show() de l'objet courant
-      // En argument, on fournit le fichier de Vue
-      // Par convention, chaque fichier de vue sera dans un sous-dossier du nom du Controller
-      $this->show('car/list', [
-          'carList' => $carList,
-      ]);
+        // On appelle la méthode show() de l'objet courant
+        // En argument, on fournit le fichier de Vue
+        // Par convention, chaque fichier de vue sera dans un sous-dossier du nom du Controller
+        $this->show('car/list', [
+            'carList' => $carList,
+        ]);
     }
 
     /**
@@ -35,37 +35,38 @@ class CarController extends CoreController
      */
     public function createAction()
     {
-      // dump($_POST);
-      // exit;
-      // On récupère les infos de notre formulaire à l'aide de filter_input. Cette fonction permet d'aller vérifier qu'une entrée de $_POST existe et nous renvoyer son contenu. Si l'entrée n'existe pas, elle renvoie null. L'avantage c'est que $firstname sera toujours existante
-      $brand = filter_input(INPUT_POST, 'brand');
-      $model = filter_input(INPUT_POST, 'model');
-      $registration = filter_input(INPUT_POST, 'registration');
-      $fuel = filter_input(INPUT_POST, 'fuel');
-      $price = filter_input(INPUT_POST, 'price', FILTER_VALIDATE_INT);
-      $kind = filter_input(INPUT_POST, 'kind');
-      $reserved = filter_input(INPUT_POST, 'reserved');
+        // TODO faire des if(isset)
+        // dump($_POST);
+        // exit;
+        // On récupère les infos de notre formulaire à l'aide de filter_input. Cette fonction permet d'aller vérifier qu'une entrée de $_POST existe et nous renvoyer son contenu. Si l'entrée n'existe pas, elle renvoie null. L'avantage c'est que $firstname sera toujours existante
+        $brand = filter_input(INPUT_POST, 'brand');
+        $model = filter_input(INPUT_POST, 'model');
+        $registration = filter_input(INPUT_POST, 'registration');
+        $fuel = filter_input(INPUT_POST, 'fuel');
+        // floatval string to float
+        $price = floatval(filter_input(INPUT_POST, 'price'));
+        $kind = filter_input(INPUT_POST, 'kind');
+        $reserved = filter_input(INPUT_POST, 'reserved');
 
-  
-      // Comme on utilise l'approche Active Record, on doit créer une catégorie vide et la remplir avec les infos provenant du formulaire.
+        dump($price);
+        // Comme on utilise l'approche Active Record, on doit créer une catégorie vide et la remplir avec les infos provenant du formulaire.
 
-      $newCar = new Car();
+        $newCar = new Car();
+        
+        // On utilise les données provenant du formulaire pour remplir la voiture
+        $newCar->setBrand($brand);
+        $newCar->setBrand($model);
+        $newCar->setRegistration($registration);
+        $newCar->setFuel($fuel);
+        $newCar->setPrice($price);
+        $newCar->setKind($kind);
+        $newCar->setReserved($reserved);        
 
-      
-      // On utilise les données provenant du formulaire pour remplir la voiture
-      $newCar->setBrand($brand);
-      $newCar->setBrand($model);
-      $newCar->setRegistration($registration);
-      $newCar->setFuel($fuel);
-      $newCar->setPrice($price);
-      $newCar->setKind($kind);
-      $newCar->setReserved($reserved);        
+        // Maintenant que la voiture est remplie avec les bonnes infos, on sauvegarde celle-ci dans la BDD en utilisant la méthode save() qui s'occupe de vérifier si la voiture existe et la créer avec insert()
+        $newCar->save();
 
-      // Maintenant que la voiture est remplie avec les bonnes infos, on sauvegarde celle-ci dans la BDD en utilisant la méthode save() qui s'occupe de vérifier si la voiture existe et la créer avec insert()
-      $newCar->save();
-
-      // Une fois la voiture insérée en BDD, on redirige vers la page liste des étudiants
-      $this->redirect('car-list');
+        // Une fois la voiture insérée en BDD, on redirige vers la page liste des étudiants
+        //$this->redirect('car-list');
 
     }
 

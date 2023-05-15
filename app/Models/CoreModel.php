@@ -81,7 +81,4 @@ abstract class CoreModel
     abstract public static function find($id); // R
     abstract public function update(); // U
     abstract public function delete(); // D
-
-
-
 }

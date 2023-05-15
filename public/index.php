@@ -46,6 +46,16 @@ $router->map(
     'car-list'
 );
 
+$router->map(
+    'POST',
+    '/car/list',
+    [
+        'method' => 'createAction',
+        'controller' => 'CarController'
+    ],
+    'car-create'
+);
+
 
 /* -------------
 --- DISPATCH ---

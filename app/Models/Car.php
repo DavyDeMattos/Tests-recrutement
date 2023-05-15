@@ -94,6 +94,7 @@ class Car extends CoreModel
      */
     public function insert()
     {
+        // TODO vérifier fonction
         // Récupération de l'objet PDO représentant la connexion à la DB
         $pdo = Database::getPDO();
 
@@ -142,6 +143,7 @@ class Car extends CoreModel
      */
     public function update()
     {
+        // TODO vérifier fonction
         // Récupération de l'objet PDO représentant la connexion à la DB
         $pdo = Database::getPDO();
 // (:brand, :model, :registration, :fuel, :price, :kind, :reserved)
@@ -189,6 +191,7 @@ class Car extends CoreModel
      */
     public function delete()
     {
+        // TODO vérifier fonction
         // Récupération de l'objet PDO représentant la connexion à la DB
         $pdo = Database::getPDO();
 

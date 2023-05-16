@@ -14,7 +14,7 @@
     </thead>
     <tbody class="table-group-divider">
     <?php foreach ($carList as $currentCar) : ?>
-        <tr>
+        <tr value="<?= $currentCar->getId(); ?>">
             <th scope="row"><?= $currentCar->getId(); ?></th>
             <td><?= $currentCar->getBrand(); ?></td>
             <td><?= $currentCar->getModel(); ?></td>
@@ -23,8 +23,8 @@
             <td><?= $currentCar->getPrice(); ?> €</td>
             <td><?= $currentCar->getKind(); ?></td>
             <td><?= $currentCar->getReserved(); ?></td>
-            <td><input class="btn btn-primary" type="button" value="Edit"></td>
-            <td><input class="btn btn-danger" type="submit" value="Delete"></td>
+            <td><input for="<?= $currentCar->getId(); ?>" class="btn btn-primary button--edit" type="button" value="Edit"></td>
+            <td><input for="<?= $currentCar->getId(); ?>" class="btn btn-danger button--delete" type="button" value="Delete"></td>
         </tr>
     <?php endforeach; ?>
     </tbody>

@@ -4,6 +4,7 @@
 
 </footer>
 <script src="/assets/js/app.js"></script>
+<script src="/assets/js/form.js"></script>
 <script src="/assets/js/car.js"></script>
 <script src="/assets/js/carlist.js"></script>
 </body>

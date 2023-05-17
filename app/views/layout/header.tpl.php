@@ -12,12 +12,10 @@
     
 <header>
 
-<?php /*d(get_defined_vars()); 
-      d($_SESSION);*/?>
-  <?php
-  // On inclut des sous-vues => "partials"
-  include __DIR__ . '/../partials/nav.tpl.php';
-  ?>
+<?php
+// On inclut des sous-vues => "partials"
+include __DIR__ . '/../partials/nav.tpl.php';
+?>
 
 <h1 class="text-center">Gestion de voitures</h1>
 

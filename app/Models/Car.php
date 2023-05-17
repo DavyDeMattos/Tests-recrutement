@@ -45,40 +45,32 @@ class Car extends CoreModel
     //==============================
 
     /**
-     * Méthode permettant de récupérer un enregistrement de la table Car en fonction d'un id donné
+     * Method to get datas from BDD with an id
      *
-     * @param int $carId ID de la catégorie
+     * @param int $carId Car's id
      * @return Car
      */
     public static function find($carId)
     {
-        // se connecter à la BDD
+        // connection to BDD
         $pdo = Database::getPDO();
-
-        // écrire notre requête
-        // ! Fonction SQL à modifier
         $sql = 'SELECT * FROM `car` WHERE `id` =' . $carId;
-
-        // exécuter notre requête
         $pdoStatement = $pdo->query($sql);
 
-        // un seul résultat => fetchObject
         // self::class permet d'afficher le FQCN (nom complet) de la classe dans laquelle on se situe
         $car = $pdoStatement->fetchObject(self::class);
 
-        // retourner le résultat
         return $car;
     }
 
     /**
-     * Méthode permettant de récupérer tous les enregistrements de la table car
+     * MEthod to get every datas from table car 
      *
      * @return Car[]
      */
     public static function findAll()
     {
         $pdo = Database::getPDO();
-        // ! Fonction SQL à modifier
         $sql = 'SELECT * FROM `car`';
         $pdoStatement = $pdo->query($sql);
         $results = $pdoStatement->fetchAll(PDO::FETCH_CLASS, self::class);
@@ -87,29 +79,21 @@ class Car extends CoreModel
     }
 
     /**
-     * Méthode permettant d'ajouter un enregistrement dans la table car
-     * L'objet courant doit contenir toutes les données à ajouter : 1 propriété => 1 colonne dans la table (sauf les colonnes qui ont une valeur par défaut dans la BDD : id, created_at, home_order)
+     * Method to add car's information to table 'car'
+     * Object has to contain every propriety except for those who has default value (ex: updated_at)
      *
      * @return bool
      */
     public function insert()
     {
-        // TODO vérifier fonction
-        // Récupération de l'objet PDO représentant la connexion à la DB
         $pdo = Database::getPDO();
 
-        // Ecriture de la requête INSERT INTO
-        // Pour se protéger des injections SQL notre requete doit comporter des "emplacements". Des sortes de cases dans lesquelles on mettra les vraies valeurs plus tard.
-        // Par convention, un emplacement commence par ":" et porte le nom du champ.
-        // ! Fonction SQL à modifier
         $sql = "INSERT INTO `car` (`brand`, `model`, `registration`, `fuel`, `price`, `kind`, `reserved` )
         VALUES (:brand, :model, :registration, :fuel, :price, :kind, :reserved)
         ";
 
-        // Une fois la requete créée, on la confie à PDO pour qu'il prenne connaissance de celle-ci.
         $query = $pdo->prepare($sql);
 
-        // Maintenant qu'il sait que la requete est une requete INSERT INTO qui contient 3 emplacements, on les remplit avec nos valeurs
         $query->bindValue(':brand', $this->brand);
         $query->bindValue(':model', $this->model);
         $query->bindValue(':registration', $this->registration);
@@ -118,37 +102,26 @@ class Car extends CoreModel
         $query->bindValue(':kind', $this->kind);
         $query->bindValue(':reserved', $this->reserved);
 
-        // On exécute la requete préparée à l'aide de la méthode execute
         $insertedRows = $query->execute();
 
-        // Si au moins une ligne ajoutée
         if ($insertedRows) {
-            // Alors on récupère l'id auto-incrémenté généré par MySQL
             $this->id = $pdo->lastInsertId();
 
-            // On retourne VRAI car l'ajout a parfaitement fonctionné
             return true;
-            // => l'interpréteur PHP sort de cette fonction car on a retourné une donnée
         }
 
-        // Si on arrive ici, c'est que quelque chose n'a pas bien fonctionné => FAUX
         return false;
     }
 
     /**
-     * Méthode permettant de mettre à jour un enregistrement dans la table car
-     * L'objet courant doit contenir l'id, et toutes les données à ajouter : 1 propriété => 1 colonne dans la table
+     * Method to update one row on car table
+     * Object has to contain every propriety except for those who has default value (ex: updated_at)
      *
      * @return bool
      */
     public function update()
     {
-        // TODO vérifier fonction
-        // Récupération de l'objet PDO représentant la connexion à la DB
         $pdo = Database::getPDO();
-        // (:brand, :model, :registration, :fuel, :price, :kind, :reserved)
-        // Ecriture de la requête UPDATE
-        // ! Fonction SQL à modifier
         $sql = "
             UPDATE `car`
             SET
@@ -163,11 +136,8 @@ class Car extends CoreModel
             WHERE id = :id
         ";
 
-        // On envoie la requete à PDO avec des emplacements pour qu'il la prépare.
         $query = $pdo->prepare($sql);
 
-        // Une fois que PDO est courant du format de la requete, on lui donne les valeurs à mettre dans les emplacements
-        // Le 3ème argument permet de forcer la vérification d'un type de donnée (par défaut c'est string : PDO::PARAM_STR, si on veut vérifier un entier c'est PDO::PARAM_INT)
         $query->bindValue(':brand', $this->brand, PDO::PARAM_STR);
         $query->bindValue(':model', $this->model, PDO::PARAM_STR);
         $query->bindValue(':registration', $this->registration, PDO::PARAM_STR);
@@ -177,36 +147,27 @@ class Car extends CoreModel
         $query->bindValue(':reserved', $this->reserved, PDO::PARAM_STR);
         $query->bindValue(':id', $this->id, PDO::PARAM_INT);
 
-        // Execution de la requête de mise à jour avec la méthode execute
         $updatedRows = $query->execute();
-        // On retourne VRAI, si au moins une ligne ajoutée
         return ($updatedRows);
     }
 
 
     /**
-     * Méthode supprimant l'objet courant de la BDD
+     * Method to delete car on BDD
      *
      * @return void
      */
     public function delete()
     {
-        // TODO vérifier fonction
-        // Récupération de l'objet PDO représentant la connexion à la DB
         $pdo = Database::getPDO();
 
-        // On se crée une requete SQL de suppression. Comme l'ID est modifiable depuis l'url par l'utilisateur, on fait une requete préparée.
-        // ! Fonction SQL à modifier
         $sql = "DELETE FROM `car`
         WHERE `id` = :id";
 
-        // On confie à PDO la requete SQL qu'il va recevoir. Ainsi il est informé du nombre d'éléments qui vont composer cette requete. 
         $pdoStatement = $pdo->prepare($sql);
 
-        // On remplace l'emplace :id par sa vraie valeur
         $pdoStatement->bindValue(':id', $this->id, PDO::PARAM_INT);
 
-        // On execute la requete et on retourne ce que la méthode execute nous renvoie (true ou false)
         return $pdoStatement->execute();
         
     }

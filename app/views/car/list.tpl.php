@@ -29,7 +29,7 @@
         </template> -->
         <?php foreach ($carList as $currentCar) : ?>
             <tr id="car-template">
-                <th scope="row"><?= $currentCar->getId(); ?></th>
+                <th scope="row" data-id=""><?= $currentCar->getId(); ?></th>
                 <td><?= $currentCar->getBrand(); ?></td>
                 <td><?= $currentCar->getModel(); ?></td>
                 <td><?= $currentCar->getRegistration(); ?></td>
@@ -63,23 +63,23 @@
             <input required class="form-control" id="price" name="price" type="number" step=".01" placeholder="Indiquer le prix de la voiture"></input>
         </div>
         <div class="d-flex">
-            <select required class="form-select mb-3 p-2" name="fuel" aria-label="Default select example">
+            <select required class="form-select mb-3 p-2" id="fuel" name="fuel" aria-label="Default select example">
                 <option selected value="" >Choisissez le carburant</option>
                 <option value="Gazoil">Gazoil</option>
                 <option value="Sans plomb 95">Sans plomb 95</option>
                 <option value="Sans plomb 98">Sans plomb 98</option>
             </select>
-            <select required class="form-select mb-3 p-2" name="kind" aria-label="Default select example">
+            <select required class="form-select mb-3 p-2" id="kind" name="kind" aria-label="Default select example">
                 <option selected value="">Choisissez le type de vente</option>
                 <option value="Occasion">Occasion</option>
                 <option value="Neuf">Neuf</option>
             </select>
-            <select required class="form-select mb-3 p-2" name="reserved" aria-label="Default select example">
+            <select required class="form-select mb-3 p-2" id="reserved" name="reserved" aria-label="Default select example">
                 <option selected value="">Est-elle réservée ?</option>
                 <option value="Oui">Oui</option>
                 <option value="Non">Non</option>
             </select>
         </div>
-        <button type="submit" class="btn btn-secondary">Soumettre</button>
+        <button type="submit" class="btn btn-secondary add-car">Soumettre</button>
     </form>
 </div>

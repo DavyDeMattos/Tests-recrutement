@@ -62,3 +62,6 @@ ORDER BY `qte_vendu` DESC
 *Le `LIMIT` ne fonctionne pas et je n'arrivve pas à trouver comment régler la requête SQL sans variable*
 
 6- Écrire la requête permettant de remonter les magasins vendant "Les Misérables" plus que la moyenne de vente de ce livre de tous les magasins
+
+<!-- Use AVG
+Faire deux sélections ? -->

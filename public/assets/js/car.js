@@ -1,9 +1,8 @@
-// Ce "module" / "composant" contient toutes les méthodes qui concernent une tache
 const car = {
 
   /**
-   * Méthode qui crée une tache dans le DOM et l'insère dans la page
-   * @param {Object} newCar Objet représentant la tache à insérer
+   * Function which add a car in the board
+   * @param {Object} newCar Object wich car'sdata
    */
   create: function(newCar) {
 
@@ -97,7 +96,7 @@ const car = {
   },
 
   /**
-   * Méthode dont le role est de poser les écouteurs d'évenements sur une tache
+   * Function which add Listener to  delete and edit buttons
    * @param {DOMElement} carElement 
    */
   addListeners: function(carElement) {

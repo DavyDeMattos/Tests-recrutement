@@ -13,20 +13,34 @@
         </tr>
     </thead>
     <tbody class="table-group-divider">
-    <?php foreach ($carList as $currentCar) : ?>
-        <tr value="<?= $currentCar->getId(); ?>">
-            <th scope="row"><?= $currentCar->getId(); ?></th>
-            <td><?= $currentCar->getBrand(); ?></td>
-            <td><?= $currentCar->getModel(); ?></td>
-            <td><?= $currentCar->getRegistration(); ?></td>
-            <td><?= $currentCar->getFuel(); ?></td>
-            <td><?= $currentCar->getPrice(); ?> €</td>
-            <td><?= $currentCar->getKind(); ?></td>
-            <td><?= $currentCar->getReserved(); ?></td>
-            <td><input for="<?= $currentCar->getId(); ?>" class="btn btn-primary button--edit" type="button" value="Edit"></td>
-            <td><input for="<?= $currentCar->getId(); ?>" class="btn btn-danger button--delete" type="button" value="Delete"></td>
-        </tr>
-    <?php endforeach; ?>
+    <!-- <template id="car-template">
+        <tr id="car-template">
+                <th scope="row"></th>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td><input for="" class="btn btn-primary button--edit" type="button" value="Edit"></td>
+                <td><input for="" class="btn btn-danger button--delete" type="button" value="Delete"></td>
+            </tr> 
+        </template> -->
+        <?php foreach ($carList as $currentCar) : ?>
+            <tr id="car-template">
+                <th scope="row"><?= $currentCar->getId(); ?></th>
+                <td><?= $currentCar->getBrand(); ?></td>
+                <td><?= $currentCar->getModel(); ?></td>
+                <td><?= $currentCar->getRegistration(); ?></td>
+                <td><?= $currentCar->getFuel(); ?></td>
+                <td><?= $currentCar->getPrice(); ?> €</td>
+                <td><?= $currentCar->getKind(); ?></td>
+                <td><?= $currentCar->getReserved(); ?></td>
+                <td><input for="<?= $currentCar->getId(); ?>" class="btn btn-primary button--edit" type="button" value="Edit"></td>
+                <td><input for="<?= $currentCar->getId(); ?>" class="btn btn-danger button--delete" type="button" value="Delete"></td>
+            </tr>
+        <?php endforeach; ?>
     </tbody>
 </table>
 <div class="container">

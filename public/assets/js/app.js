@@ -1,11 +1,13 @@
 const app = {
 
+  baseEndpoint: "http://localhost:8080/car/",
+
   init: function() {
 
     // On démarre les modules qui ont besoin d'etre démarrés au chargement de la page
     console.log("app initialisé");
 
-    // app.loadTaskFromAPI();
+    app.loadCarFromAPI();
 
     const editButtons = document.querySelectorAll('.button--edit');
     const deleteButtons = document.querySelectorAll('.button--delete');
@@ -30,11 +32,18 @@ const app = {
     console.log(event.currentTarget.getAttribute('for'));
   },
 
-  loadTaskFromAPI: async function() {
-    console.log('Méthode loadTasks appelée');
+  loadCarFromAPI: async function() {
+    console.log('Méthode loadCars appelée');
 
-    const response = await fetch('http://localhost:8000/car/list');
-    console.log(response);
+    const ajax = new XMLHttpRequest();
+    ajax.open('POST', app.baseEndpoint + 'list');
+    
+
+    const response = await fetch(app.baseEndpoint + 'list');
+
+    const carList = await response.json();
+    console.log(carList);
+
   }
 
 }

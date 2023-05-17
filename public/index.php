@@ -46,7 +46,7 @@ $router->map(
     'car-list'
 );
 
-$router->map(
+/*$router->map(
     'POST',
     '/car/list',
     [
@@ -54,7 +54,16 @@ $router->map(
         'controller' => 'CarController'
     ],
     'car-create'
+);*/
+$router->map(
+    'GET',
+    '/car/api',
+    [
+        'controller' => 'MainController'
+    ],
+    'main-api'
 );
+
 
 
 /* -------------

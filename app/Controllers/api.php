@@ -27,7 +27,6 @@ $pdo = $database->getPDO();
 $car = new Car($pdo);
 
 $carList = $car->findAll();
-
 // On vérifie si on a au moins 1 voiture
 if($carList->rowCount() > 0){
   // On initialise un tableau associatif

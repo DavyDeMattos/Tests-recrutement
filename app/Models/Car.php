@@ -172,6 +172,30 @@ class Car extends CoreModel
         
     }
 
+    /**
+     * Method to order car on BDD
+     *
+     * @return Car[]
+     */
+    public static function orderBy($filter)
+    {
+        var_dump("coucou");
+        var_dump($filter);
+        $pdo = Database::getPDO();
+
+        $sql = "SELECT * FROM `car`
+        ORDER BY" . $filter;
+        // var_dump($sql);
+        $pdoStatement = $pdo->query($sql);
+        // $pdoStatement->bindValue(':filter', $this->id, PDO::PARAM_INT);
+        $results = $pdoStatement->fetchAll(PDO::FETCH_CLASS, self::class);
+        // $results = $pdoStatement->execute();
+        // var_dump($results);
+        // exit();
+        return $results;
+        
+    }
+
     //==============================
     // Getters / Setters
     //==============================  

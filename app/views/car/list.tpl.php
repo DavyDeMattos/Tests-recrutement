@@ -1,5 +1,10 @@
 <table class="table container">
     <!-- <caption>Liste des voitures rentrées</caption> -->
+    <ul>
+        <a href="<?= $router->generate('car-orderBy')."brand";?>">
+            <li>Marque</li>
+        </a>
+    </ul>
     <thead>
         <tr>
             <th scope="col">Voiture</th>
@@ -29,7 +34,7 @@
         </template> -->
         <?php foreach ($carList as $currentCar) : ?>
             <tr id="car-template">
-                <th scope="row" data-id=""><?= $currentCar->getId(); ?></th>
+                <th scope="row" data-id="<?= $currentCar->getId(); ?>"><?= $currentCar->getId(); ?></th>
                 <td><?= $currentCar->getBrand(); ?></td>
                 <td><?= $currentCar->getModel(); ?></td>
                 <td><?= $currentCar->getRegistration(); ?></td>
@@ -37,8 +42,10 @@
                 <td><?= $currentCar->getPrice(); ?> €</td>
                 <td><?= $currentCar->getKind(); ?></td>
                 <td><?= $currentCar->getReserved(); ?></td>
-                <td><input for="<?= $currentCar->getId(); ?>" class="btn btn-primary button--edit" type="button" value="Edit"></td>
-                <td><input for="<?= $currentCar->getId(); ?>" class="btn btn-danger button--delete" type="button" value="Delete"></td>
+                <td><input href="http://localhost:8080/car/edit/<?=$currentCar->getId(); ?>" for="<?= $currentCar->getId(); ?>" class="btn btn-primary button--edit" type="button" value="Edit"></td>
+                <td><a href="<?= $router->generate('car-delete') . $currentCar->getId();?>">
+                    <input for="<?= $currentCar->getId(); ?>" class="btn btn-danger button--delete" type="button" value="Delete">
+                </a></td>
             </tr>
         <?php endforeach; ?>
     </tbody>

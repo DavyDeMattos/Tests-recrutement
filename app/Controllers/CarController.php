@@ -109,4 +109,41 @@ class CarController extends CoreController
         $this->redirect('car-list');
 
     }
+    /**
+     * Function in charge of to delete a car
+     *
+     * @param int $id
+     * @return void
+     */
+    public function deleteAction($id)
+    {
+        // dump($_POST);
+        // exit;
+        $carToDelete = Car::find($id); 
+
+        $carToDelete->delete();
+
+        // Une fois la voiture insérée en BDD, on redirige vers la page liste des voitures
+        $this->redirect('car-list');
+
+    }
+    /**
+     * Function to order all cars
+     * @param string $filter
+     * @return void
+     */
+    public function orderAction($filter)
+    {
+        var_dump("coucou");
+        $carList = Car::orderBy($filter);
+        var_dump($carList);
+
+
+        // En argument, on fournit le fichier de Vue
+        // Par convention, chaque fichier de vue sera dans un sous-dossier du nom du Controller
+        $this->show('car/list?'.$filter, [
+            'carList' => $carList,
+        ]);
+        // $this->redirect('car-list');
+    }
 }                                           

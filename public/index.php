@@ -46,7 +46,7 @@ $router->map(
     'car-list'
 );
 
-/*$router->map(
+$router->map(
     'POST',
     '/car/list',
     [
@@ -54,7 +54,7 @@ $router->map(
         'controller' => 'CarController'
     ],
     'car-create'
-);*/
+);
 $router->map(
     'GET',
     '/car/api',
@@ -63,8 +63,26 @@ $router->map(
     ],
     'main-api'
 );
+// Route d'affichage du listing des produits par marque
+$router->map( 
+    'GET', 
+    '/car/delete/[i:car_id]', 
+    [ 
+        'method' => 'deleteAction',
+        'controller' => 'CarController'
+    ],
+    'car-delete' 
+);
 
-
+$router->map(
+    'GET',
+    '/car/list?[a:car_filter]',
+    [
+        'method' => 'orderAction',
+        'controller' => 'CarController'
+    ],
+    'car-orderBy'
+);
 
 /* -------------
 --- DISPATCH ---
